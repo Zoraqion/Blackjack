@@ -96,7 +96,7 @@ def print_hands():
         print("------------------------------------------------------------------")
         print("")
     else:
-        print(f"You have {buy_in * double + buy_in * double1} doubloons on this game. split")
+        print(f"You have {buy_in * double + buy_in * double1} doubloons on this game.")
         print("------------------------------------------------------------------")
         print("")
     if player_turn == 1:
@@ -169,12 +169,19 @@ def game():
     double1 = 1
     buy_in = -1
     split = "n"
-    slow_print(f"You have {doubloons} doubloons.")
     while buy_in < 0 or buy_in > doubloons:
+        slow_print(f"You have {doubloons} doubloons.")
         print("")
-        print("")
+        print('')
         slow_print("How many doubloons do you throw in?:")
-        buy_in = int(input())
+        try:
+            buy_in = int(input())
+        except ValueError:
+            print("")
+            print('')
+            slow_print("Despite your attempts, doubloons cannot be measured that way.")
+            wait()
+            os.system("clear")
     doubloons = doubloons - buy_in
     write(doubloons)
     initialize(player_hand)
@@ -428,6 +435,7 @@ if play.lower() == "y":
         deck = ["A", "A", "A", "A", 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7,
                 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, "J", "J", "J", "J", "Q", "Q", "Q", "Q", "K", "K", "K", "K"]
         player_hand = []
+        player_hand1=[]
         hands = [player_hand]
         dealer_hand = []
         os.system('clear')
